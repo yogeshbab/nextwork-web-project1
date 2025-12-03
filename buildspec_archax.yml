@@ -2,15 +2,17 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      java: corretto17   # or corretto11 if your pom.xml needs Java 11
     commands:
-      - echo Installing dependencies...
-      - npm install
+      - echo Installing Maven dependencies...
+      - mvn clean install
+
   build:
     commands:
-      - echo Build started...
-      - npm run build
+      - echo Building WAR artifact...
+      - mvn package
 
 artifacts:
-  base-directory: dist
   files:
-    - '**/*'
+    - target/*.war
