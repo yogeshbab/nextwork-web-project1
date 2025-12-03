@@ -1,7 +1,16 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - npm install
   build:
     commands:
-      - echo "Buildspec file is valid"
+      - echo Build started...
+      - npm run build
 
+artifacts:
+  base-directory: dist
+  files:
+    - '**/*'
