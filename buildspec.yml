@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17   # or corretto11 if your pom.xml needs Java 11
+      java: corretto8   # or corretto11 if your pom.xml needs Java 11
     commands:
       - echo Installing Maven dependencies...
       - mvn clean install
