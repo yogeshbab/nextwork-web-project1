@@ -1,5 +1,12 @@
 version: 0.2
 
+
+env:
+  variables:
+    DOCKERHUB_USERNAME: "yogeshbab"
+  secrets-manager:
+    DOCKERHUB_PASSWORD: dockerhub-password-new
+
 phases:
   pre_build:
     commands:
