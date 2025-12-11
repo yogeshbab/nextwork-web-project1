@@ -1,18 +1,24 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      java: corretto8   # or corretto11 if your pom.xml needs Java 11
+  pre_build:
     commands:
-      - echo Installing Maven dependencies...
-      - mvn clean install
-
+      - echo Logging in to Docker Hub...
+      - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      
   build:
     commands:
-      - echo Building WAR artifact...
-      - mvn package
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $DOCKERHUB_REPO:latest .
+      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing image to Docker Hub...
+      - docker push $DOCKERHUB_REPO:latest
 
 artifacts:
   files:
     - '**/*'
+
