@@ -1,6 +1,5 @@
 version: 0.2
 
-
 env:
   variables:
     DOCKERHUB_USERNAME: "yogeshbab"
@@ -12,20 +11,14 @@ phases:
     commands:
       - echo Logging in to Docker Hub...
       - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-      
+
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build -t $DOCKERHUB_REPO:latest .
-      
+      - docker build -t yogeshbab/babunew:latest .
+
   post_build:
     commands:
-      - echo Build completed on `date`
       - echo Pushing image to Docker Hub...
-      - docker push $DOCKERHUB_REPO:latest
-
-artifacts:
-  files:
-    - '**/*'
-
+      - docker push yogeshbab/babunew:latest
+      - echo Build completed on `date`
